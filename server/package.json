@@ -18,9 +18,11 @@
     "mongoose": "^7.5.0",
     "nodemon": "^3.0.1",
     "typescript": "^5.2.2",
+    "uuid": "^9.0.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.3",
     "ts-node": "^10.9.1"
   }
 }
