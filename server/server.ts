@@ -16,11 +16,5 @@ app.use(express.json());
 }
 )();
 
-
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript Express Server!');
-});
-
 app.use("/api/v1/users", userRoutes);
 
