@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Provider } from 'react-redux'
-import { store } from '@/store/store'
+import Providers from './Provider'
+import DefaultLayout from './DefaultLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,11 +17,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Provider store={store}>
+    <html suppressHydrationWarning lang="en" className='dark'>
+      <body className={`${inter.className} dark:bg-bgPrimary `}>
+        <Providers>
+          <DefaultLayout>
       {children}
-        </Provider>
+          </DefaultLayout>
+        </Providers>
       </body>
     </html>
   )
