@@ -19,7 +19,7 @@ const ThemeSwitcher = (props: Props) => {
   if (!mounted) {
     // Suspense fallback
     return (
-      <div className="absolute animate-pulse rounded-full w-12 h-6 bg-gray-600 opacity-30 dark:bg-slate-100"></div>
+      <div className=" animate-pulse rounded-full w-12 h-6 bg-gray-600 opacity-30 dark:bg-slate-100"></div>
     );
   }
 
