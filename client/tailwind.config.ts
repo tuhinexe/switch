@@ -12,7 +12,11 @@ const config: Config = {
       
       colors:{
         'bgPrimary': '#0a1024',
-        'primary': '#4330d1',
+        'primary': '#5442fc',
+      },
+      fontFamily:{
+        'body': ['var(--font-poppins)'],
+        'head': ['var(--font-play)'],
       }
     },
   },

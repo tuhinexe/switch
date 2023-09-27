@@ -1,10 +1,22 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import {Play,Poppins } from 'next/font/google'
 import Providers from './Provider'
 import DefaultLayout from './DefaultLayout'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({
+  weight: '400',
+  style: 'normal',
+  subsets: ['latin'],
+  variable: '--font-poppins'
+})
+
+const play = Play({
+  weight: '400',
+  style: 'normal',
+  subsets: ['latin'],
+  variable: '--font-play'
+})
 
 export const metadata: Metadata = {
   title: 'Switch',
@@ -17,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html suppressHydrationWarning lang="en" className='dark'>
-      <body className={`${inter.className} dark:bg-bgPrimary `}>
+    <html suppressHydrationWarning lang="en" className={`dark `}>
+      <body className={` ${poppins.className} ${play.variable} dark:bg-bgPrimary `}>
         <Providers>
           <DefaultLayout>
       {children}
