@@ -27,12 +27,12 @@ const tabs = [
   },
   {
     name: 'Trending',
-    icon: <AiOutlineBook className="text-primary" size={25} />,
+    icon: <AiOutlineFire className="text-primary" size={25} />,
     url: '/trending',
   },
   {
     name: 'Favourite',
-    icon: <AiOutlineFire className="text-primary" size={25} />,
+    icon: <AiOutlineBook className="text-primary" size={25} />,
     url: '/favourite',
   },
 ];
