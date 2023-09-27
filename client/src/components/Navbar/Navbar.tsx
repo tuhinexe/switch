@@ -12,8 +12,8 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <nav className=" flex justify-between w-full items-start mt-4">
-      <div className="ml-6">
+    <nav className=" flex justify-between w-full items-start lg:mt-4">
+      <div className="lg:ml-6 hidden lg:block">
         <SearchBar
           placeHolder="Search streams or channels"
           onSearch={(searchTerm: string) => {
@@ -21,7 +21,11 @@ const Navbar = (props: Props) => {
           }}
         />
       </div>
-      <div className="flex justify-center items-center mr-6 gap-6">
+      <div className="w-full bg-indigo-950/30 lg:bg-inherit py-2 lg:py-auto lg:w-auto flex justify-end lg:justify-center items-center lg:mr-6 lg:gap-6 gap-2">
+        <div className=' flex justify-center items-center p-2 lg:hidden mr-auto ml-2'>
+        <Image className='' src="/assets/logos/logo-new.png" alt='logo' width={30} height={40} />
+        <p className='font-head text-lg font-bold'>Switch</p>
+        </div>
         <ThemeSwitcher />
         <motion.span
           whileHover={{ scale: 1.1 }}

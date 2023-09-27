@@ -26,7 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, placeHolder }) => {
     >
       <PiMagnifyingGlass className="text-primary ml-2" size={25} />
       <input
-        className="p-2 outline-none border-none bg-transparent w-[400px]"
+        className="p-2 outline-none border-none bg-transparent lg:w-[400px]"
         placeholder={placeHolder}
         type="text"
         onChange={handleInputChange}

@@ -5,6 +5,7 @@ import { FiSun } from 'react-icons/fi';
 import { HiOutlineMoon } from 'react-icons/hi';
 import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
+import SwitcherSkeleton from '../UI/Skeletons/SwitcherSkeleton';
 
 type Props = {};
 
@@ -19,7 +20,7 @@ const ThemeSwitcher = (props: Props) => {
   if (!mounted) {
     // Suspense fallback
     return (
-      <div className=" animate-pulse rounded-full w-12 h-6 bg-gray-600 opacity-30 dark:bg-slate-100"></div>
+      <SwitcherSkeleton />
     );
   }
 
