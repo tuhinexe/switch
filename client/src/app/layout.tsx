@@ -30,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en" className={`dark `}>
-      <body className={` ${poppins.className} ${play.variable} dark:bg-bgPrimary `}>
+      <body className={` ${poppins.className} ${play.variable} dark:bg-bgPrimary overflow-hidden`}>
         <Providers>
           <DefaultLayout>
       {children}

@@ -32,13 +32,13 @@ const MobileSidebar = (props: Props) => {
 
   return (
     <motion.footer
-      className="fixed bottom-0 bg-indigo-950 bg-opacity-30 w-full flex justify-evenly p-2"
+      className="z-50 fixed bottom-0 bg-indigo-200/50 backdrop-blur-md dark:bg-indigo-950 w-full flex justify-evenly p-2"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className={`bg-indigo-900/20 p-2 rounded-xl ${
+        className={`bg-indigo-900/30 p-2 rounded-xl ${
           pathName === '/' && 'bg-indigo-900/50'
         }`}
         animate={pathName === '/' ? { scale: [1, 1.1, 1] } : { scale: 1 }}

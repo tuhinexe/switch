@@ -15,7 +15,7 @@ type Props = {
 const DefaultLayout = (props: Props) => {
   return (
     
-    <main className='flex w-full overflow-hidden'>
+    <main className='flex w-full'>
         <ToastContainer theme='dark' position='bottom-center' autoClose={5000} />
         <div className='lg:flex hidden'>
         <SideBar />
@@ -25,7 +25,9 @@ const DefaultLayout = (props: Props) => {
         </div>
         <div className='w-full flex flex-col'>
         <Navbar />
+        <section className=''>
         {props.children}
+        </section>
         </div>
         
     </main>
