@@ -2,7 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-type Props = {}
+type Props = {
+  isLive?: boolean
+}
 
 const VideoCard = (props: Props) => {
   return (

@@ -7,6 +7,7 @@ import { PiBellRingingBold } from 'react-icons/pi';
 import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {};
 
@@ -49,7 +50,9 @@ const Navbar = (props: Props) => {
           className="p-2 rounded-full bg-indigo-900/20 cursor-pointer"
           title="Profile"
         >
+          <Link href='/profile'>
           <Image src="/assets/images/hacker.png" alt='profile-logo'  width={25} height={40} />
+          </Link>
         </motion.span>
       </div>
     </nav>
