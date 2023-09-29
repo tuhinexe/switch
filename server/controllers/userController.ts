@@ -2,7 +2,6 @@ import User from "../models/Users";
 import { Request, Response } from "express";
 import { z } from "zod";
 import { UserType } from "../types/User";
-import ts from "typescript";
 
 
 const signUp = async (req: Request, res: Response) => {

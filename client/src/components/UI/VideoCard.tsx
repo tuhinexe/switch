@@ -13,8 +13,8 @@ const VideoCard = (props: Props) => {
     transition={{ duration: 0.2 }}
     className='hover:cursor-pointer flex flex-col gap-2 justify-start items-start'>
         <div className='relative'>
-            <small className='absolute ml-2 bg-red-600 mt-2 rounded-md text-md px-[3px]'>Live</small>
-            <span className='absolute bottom-1 text-sm px-2 bg-indigo-950/80 left-1 rounded-lg'>500 watching</span>
+            <small className='absolute ml-2 bg-red-600 mt-2 rounded-md text-md px-[3px] text-white'>Live</small>
+            <span className='absolute bottom-1 text-sm px-2 bg-indigo-950/80 left-1 rounded-lg text-white'>500 watching</span>
             <Image className='rounded-md lg:w-[300px] w-[500px]' src='/assets/images/thumbnail.png' alt='thumbnail' width={300} height={300} />
         </div>
         <div className='flex items-center justify-center gap-2'>

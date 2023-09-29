@@ -14,7 +14,9 @@ const page = (props: Props) => {
         transition={{ duration: 0.6 }}
         
      className='flex flex-col justify-center items-center rounded-md p-2 bg-indigo-950/40 m-2'>
+      <div className='ml-auto'>
       <Logout />
+      </div>
         <Banner />
         <ProfileCard />
     </motion.div>

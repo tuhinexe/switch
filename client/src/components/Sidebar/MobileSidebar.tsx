@@ -20,8 +20,9 @@ const MobileSidebar = (props: Props) => {
 
     useEffect(() => {
         
-            setMounted(true);
-        
+           setTimeout(() => {
+                setMounted(true);
+            }, 5000);
         }, []);
 
         if (!mounted) {
