@@ -32,7 +32,7 @@ const Login = (props: Props) => {
                     <div className='grid grid-flow-row grid-cols-1 gap-4'>
                         <Input label='Firstname' type='text' placeHolder='Enter first name' name='firstname'/>
                         <Input label='Lastname' type='text' placeHolder='Enter last name' name='lastname' />
-                        <Input label='Email' type='password' placeHolder='Enter your email' name='lastname' />
+                        <Input label='Email' type='email' placeHolder='Enter your email' name='lastname' />
                         <Input label='Channel Name' type='text' placeHolder='Enter your channel name' name='lastname' />
                         
                         <Input label='Date of birth' type='date' placeHolder='Lastname' name='lastname' />

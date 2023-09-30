@@ -21,6 +21,7 @@ const Input = (props: Props) => {
         name={props.name}
         value={props.value}
         onChange={props.onChange}
+        autoComplete='off'
         
       />
       </div>
