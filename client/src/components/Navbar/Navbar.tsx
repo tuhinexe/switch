@@ -8,10 +8,14 @@ import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import Button from '../UI/Buttons/Button';
+import Login from '../Login/Login';
 
 type Props = {};
 
 const Navbar = (props: Props) => {
+  const [showLogin, setShowLogin] = React.useState(false);
+
   return (
     <nav className=" flex justify-between w-full items-start lg:mt-4">
       <div className="lg:ml-6 hidden lg:block">
@@ -44,7 +48,16 @@ const Navbar = (props: Props) => {
         >
           <PiBellRingingBold className="text-primary" size={25} />
         </motion.span>
-        <motion.span
+        <Button
+          className="hidden lg:block"
+          onClick={() => {
+            setShowLogin(true);
+          }}
+        >
+          Login
+        </Button>
+        <Login isOpen={showLogin} onClose={(value)=> setShowLogin(value)}/>
+        {/* <motion.span
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="p-2 rounded-full bg-indigo-900/20 cursor-pointer"
@@ -53,7 +66,7 @@ const Navbar = (props: Props) => {
           <Link href='/profile'>
           <Image src="/assets/images/hacker.png" alt='profile-logo'  width={25} height={40} />
           </Link>
-        </motion.span>
+        </motion.span> */}
       </div>
     </nav>
   );

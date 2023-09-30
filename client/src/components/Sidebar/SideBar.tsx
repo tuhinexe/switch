@@ -11,6 +11,7 @@ import {
 import { LuRadio } from 'react-icons/lu';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 type Props = {};
 
@@ -83,6 +84,7 @@ const sampleLiveUsers = [
 ];
 
 const SideBar = (props: Props) => {
+  const pathName = usePathname();
   return (
     <aside className=" w-[300px] flex justify-start gap-2 items-center flex-col bg-indigo-950 bg-opacity-10 backdrop-filter backdrop-blur-lg shadow-md h-screen ">
       <Link href="/" className="flex justify-center items-center gap-2 mt-4">
@@ -103,7 +105,9 @@ const SideBar = (props: Props) => {
           >
             <Link
               href={tab.url}
-              className="flex justify-start items-center mx-6 rounded-lg gap-2 p-2 hover:bg-indigo-800/20 cursor-pointer "
+              className={`flex justify-start items-center mx-6 rounded-lg gap-2 p-2 hover:bg-indigo-800/20 cursor-pointer ${
+                pathName === tab.url && 'bg-indigo-900/20'
+              }`}
             >
               {tab.icon}
               <p className="font-body font-bold text-lg">{tab.name}</p>

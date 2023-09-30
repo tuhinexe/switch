@@ -31,6 +31,17 @@ const userSchema = new mongoose.Schema({
             message: (props: any) => `${props.value} is not a valid last name!`,
         },
     },
+    profileUrl: {
+        type: String,
+        
+        validate: {
+            validator: (value: string) => {
+                return z.string().url().parse(value);
+            },
+            message: (props: any) => `${props.value} is not a valid url!`,
+        },
+    }
+    ,
     email: {
         type: String,
         required: true,
@@ -62,9 +73,17 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    about: {
+    password: {
         type: String,
         required: true,
+        validate: {
+            validator: (value: string) => {
+                return z.string().min(8).parse(value);
+            }
+        }
+    },
+    about: {
+        type: String,
         validate: {
             validator: (value: string) => {
                 return z.string().min(3).max(100).parse(value);
