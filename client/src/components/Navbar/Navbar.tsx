@@ -9,12 +9,15 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../UI/Buttons/Button';
+import Signup from '../Login/Signup';
 import Login from '../Login/Login';
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const [showLogin, setShowLogin] = React.useState(false);
+  const [showSignup, setShowSignup] = React.useState(false);
+
 
   return (
     <nav className=" flex justify-between w-full items-start lg:mt-4">
@@ -51,11 +54,20 @@ const Navbar = (props: Props) => {
         <Button
           className="hidden lg:block"
           onClick={() => {
+            setShowSignup(true);
+          }}
+        >
+          Sign up
+        </Button>
+        <Button
+          className="hidden lg:block"
+          onClick={() => {
             setShowLogin(true);
           }}
         >
           Login
         </Button>
+        <Signup isOpen={showSignup} onClose={(value)=> setShowSignup(value)}/>
         <Login isOpen={showLogin} onClose={(value)=> setShowLogin(value)}/>
         {/* <motion.span
           whileHover={{ scale: 1.1 }}
