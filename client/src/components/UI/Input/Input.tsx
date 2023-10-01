@@ -8,6 +8,7 @@ type Props = {
     value?: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     label: string;
+    required?: boolean;
 }
 
 const Input = (props: Props) => {
@@ -22,6 +23,7 @@ const Input = (props: Props) => {
         value={props.value}
         onChange={props.onChange}
         autoComplete='off'
+        required={props.required}
         
       />
       </div>

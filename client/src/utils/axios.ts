@@ -4,6 +4,9 @@ import axios_ from "axios";
 const axios = axios_.create({
   baseURL: BACKEND_URL,
   withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 axios.interceptors.response.use(

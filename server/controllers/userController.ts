@@ -1,7 +1,8 @@
 import User from "../models/Users";
 import { Request, Response } from "express";
+import { generateToken } from "../utils/jwtUtils";
 import { z } from "zod";
-import { UserType } from "../types/User";
+import { UserType } from "../types/index";
 
 
 const signUp = async (req: Request, res: Response) => {
@@ -12,7 +13,9 @@ const signUp = async (req: Request, res: Response) => {
             res.status(400).json({message: "User not created!"});
             return;
         }
-        res.status(201).json({user, message: "Welcome to the switch club!"});
+        const token = generateToken(user.uuid);
+        res.cookie("accesToken", token, {httpOnly: true,secure: true, sameSite: "none"});
+        res.status(201).json({user});
         
     } catch (error: any) {
         res.status(400).json({error: error.message});
