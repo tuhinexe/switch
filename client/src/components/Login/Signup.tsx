@@ -4,10 +4,11 @@ import Image from 'next/image';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Buttons/Button';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { signup } from '@/store/features/authAction';
 import { User } from '@/types';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { authSelector } from '@/store/store';
 import { RootState } from '@/store/store';
 import { toast } from 'react-toastify';
 type Props = {
@@ -19,8 +20,12 @@ const Signup = (props: Props) => {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> =
     useDispatch();
 
+  const {user,loading,error} = useSelector(authSelector);
+
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const formElement = event.currentTarget;
     const data = new FormData(event.currentTarget);
     const payload: User = {
       firstName: data.get('firstname') as string,
@@ -32,9 +37,20 @@ const Signup = (props: Props) => {
       confirmPassword: data.get('confirmPassword') as string,
     };
     try {
-      await dispatch(signup(payload));
-      toast.success('Welcome to Switch!');
+      const {meta} = await dispatch(signup(payload));
+      if(meta.requestStatus === 'fulfilled'){
+        toast.success('Welcome to Switch!');
+        formElement.reset();
         props.onClose(false);
+      } else {
+        // @ts-ignore
+        if(error?.message){
+        // @ts-ignore
+          toast.error(error.message);
+          return
+        }
+        toast.error('Something went wrong!');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +62,7 @@ const Signup = (props: Props) => {
       transition={{ duration: 0.5 }}
       className={`absolute ${
         props.isOpen ? 'flex' : 'hidden'
-      } justify-center items-center min-h-screen overflow-hidden w-full bg-indigo-600/20 backdrop-blur-sm bottom-0 z-50 left-0`}
+      } justify-center items-center min-h-screen overflow-hidden w-full bg-indigo-600/20 backdrop-blur-md bottom-0 z-50 left-0`}
     >
       <div className="relative bg-indigo-900/90 rounded-lg p-6 m-2 flex flex-col justify-center items-center gap-6">
         <span

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import fetchUser from '@/utils/fetchUser';
 import { login, signup } from '../features/authAction';
 
+
 const initialState = {
   user: fetchUser(),
   loading: false,

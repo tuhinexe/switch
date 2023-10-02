@@ -1,21 +1,44 @@
 import User from "../models/Users";
 import { Request, Response } from "express";
 import { generateToken } from "../utils/jwtUtils";
-import { z } from "zod";
+import bcrypt from "bcrypt";
+import validator from "validator";
 import { UserType } from "../types/index";
 
 
 const signUp = async (req: Request, res: Response) => {
-    const data: UserType = req.body;
+    let data: UserType = req.body;
+
+    if(!validator.isEmail(data.email)) {
+        res.status(400).json({message: "Invalid email!"});
+        return;
+    }
+
+    if(!validator.isStrongPassword(data.password, {minLength: 6}))   {
+        res.status(400).json({message: "Passwords must be at least 6 characters long!"});
+        return;
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(data.password, salt);
+    data.password = hashedPassword;
+
     try {
-        const user = await User.create(data);
+        let user = await User.create(data);
         if(!user) {
             res.status(400).json({message: "User not created!"});
             return;
         }
         const token = generateToken(user.uuid);
         res.cookie("accesToken", token, {httpOnly: true,secure: true, sameSite: "none"});
-        res.status(201).json({user});
+
+        const responseUser = {
+            uuid: user.uuid,
+            email: user.email,
+            userName: user.userName,
+            _id : user._id
+        }
+        res.status(201).json(responseUser);
         
     } catch (error: any) {
         res.status(400).json({error: error.message});
