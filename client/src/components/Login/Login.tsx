@@ -4,12 +4,52 @@ import Image from 'next/image'
 import Input from '../UI/Input/Input'
 import Button from '../UI/Buttons/Button'
 import { AiOutlineClose } from 'react-icons/ai'
+import { useDispatch,useSelector } from 'react-redux'
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { authSelector,RootState } from '@/store/store';
+import {toast} from 'react-toastify'
+import { login } from '@/store/features/authAction'
+
 type Props = {
     isOpen: boolean;
     onClose: (value: boolean) => void;
 }
 
 const Login = (props: Props) => {
+    const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+    const {user,loading,error} = useSelector(authSelector);
+
+
+    const [loginData, setLoginData] = React.useState({
+        email: '',
+        password: ''
+    })
+
+    const handleLogin = async (event: React.MouseEvent) => {
+        event.preventDefault();
+
+        if(!loginData.email || !loginData.password){
+            toast.error('Please fill all the fields');
+            return
+        }
+
+        const {meta} = await dispatch(login(loginData));
+
+        if(meta.requestStatus === 'fulfilled'){
+            toast.success('Welcome back!');
+            props.onClose(false);
+            return
+        } else {
+            // @ts-ignore
+            if(error?.message){
+                // @ts-ignore
+                toast.error(error.message);
+                return
+            }
+            toast.error('Something went wrong!');
+        }
+    }
+
     return (
         <motion.section 
         initial={{ opacity: 0, y: 100 }}
@@ -31,11 +71,19 @@ const Login = (props: Props) => {
             <h3 className='text-2xl font-bold mb-4'>Welcome back !</h3>
                         <div className='grid grid-flow-row grid-cols-1 gap-4'>
                             
-                            <Input label='Email' type='email' placeHolder='Enter your email' name='email' />
+                            <Input label='Email' required={true} onChange={(event) => setLoginData(
+                                {
+                                    ...loginData,
+                                    email: event.target.value
+                                }
+                            )} type='email' placeHolder='Enter your email' name='email' />
                             
-                            <Input label='Password' type='password' placeHolder='Enter your password' name='lastname' />
+                            <Input label='Password' onChange={(event) => setLoginData({
+                                ...loginData,
+                                password: event.target.value
+                            })} type='password' placeHolder='Enter your password' name='lastname' />
     
-                            <Button>Log in</Button>
+                            <Button type='button' onClick={handleLogin}>Log in</Button>
                             
                         </div>
                     </form>

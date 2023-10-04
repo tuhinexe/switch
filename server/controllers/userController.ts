@@ -46,7 +46,7 @@ const signUp = async (req: Request, res: Response) => {
 }
 
 const signIn = async (req: Request, res: Response) => {
-    const data: UserType = req.body;
+    const data = req.body;
     try {
         // @ts-ignore
         const user = await User.findByEmail(data.email);
@@ -54,10 +54,26 @@ const signIn = async (req: Request, res: Response) => {
             res.status(400).json({message: "User not found!"});
             return;
         }
-        res.status(200).json({user, message: "Welcome back!"});
+        const validPassword = await bcrypt.compare(data.password, user.password);
+        if(!validPassword) {
+            res.status(400).json({message: "Invalid password!"});
+            return;
+        }
+
+        const token = generateToken(user.uuid);
+        res.cookie("accesToken", token, {httpOnly: true,secure: true, sameSite: "none",expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3)});
+    
+        const responseUser = {
+            uuid: user.uuid,
+            email: user.email,
+            userName: user.userName,
+            _id : user._id
+        }
+        res.status(200).json(responseUser);
         
     } catch (error: any) {
-        res.status(400).json({error: error.message});
+        console.log(error);
+        res.status(400).json({message: error.message});
     }
 }
 

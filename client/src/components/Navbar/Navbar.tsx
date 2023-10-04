@@ -11,12 +11,16 @@ import Link from 'next/link';
 import Button from '../UI/Buttons/Button';
 import Signup from '../Login/Signup';
 import Login from '../Login/Login';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const [showLogin, setShowLogin] = React.useState(false);
   const [showSignup, setShowSignup] = React.useState(false);
+
+  const { user } = useSelector((state:RootState) => state.auth);
 
 
   return (
@@ -51,7 +55,8 @@ const Navbar = (props: Props) => {
         >
           <PiBellRingingBold className="text-primary" size={25} />
         </motion.span>
-        <Button
+        {!user?(<>
+          <Button
           className="hidden lg:block"
           onClick={() => {
             setShowSignup(true);
@@ -67,9 +72,8 @@ const Navbar = (props: Props) => {
         >
           Login
         </Button>
-        <Signup isOpen={showSignup} onClose={(value)=> setShowSignup(value)}/>
-        <Login isOpen={showLogin} onClose={(value)=> setShowLogin(value)}/>
-        {/* <motion.span
+        </>) : (
+          <motion.span
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="p-2 rounded-full bg-indigo-900/20 cursor-pointer"
@@ -78,7 +82,11 @@ const Navbar = (props: Props) => {
           <Link href='/profile'>
           <Image src="/assets/images/hacker.png" alt='profile-logo'  width={25} height={40} />
           </Link>
-        </motion.span> */}
+        </motion.span>
+        )}
+        <Signup isOpen={showSignup} onClose={(value)=> setShowSignup(value)}/>
+        <Login isOpen={showLogin} onClose={(value)=> setShowLogin(value)}/>
+        
       </div>
     </nav>
   );

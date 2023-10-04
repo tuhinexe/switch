@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 type Props = {
     children: string
     type?: 'button' | 'submit' | 'reset'
-    onClick?: () => void
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
     className?: string
 }
 
