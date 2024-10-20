@@ -1,0 +1,31 @@
+{
+  "name": "switch",
+  "version": "1.0.0",
+  "description": "Scalable streaming platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd apps/server && npm run dev\" \"cd apps/client && npm run dev\""
+  },
+  "keywords": [
+    "scalable",
+    "streaming",
+    "platform"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tuhinexe/switch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tuhinexe/switch/issues"
+  },
+  "author": "Tuhin Bar & Priyadarsi Halder",
+  "contributors": [
+    "Tuhin Bar (https://github.com/tuhinexe)",
+    "Priyadarsi Halder (https://github.com/PriyoRaven)"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
