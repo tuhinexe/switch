@@ -5,13 +5,14 @@ import bcrypt from "bcrypt";
 import validator from "validator";
 import Auth from "../services/Auth";
 import { IUser } from "../../../shared/types";
-import UserService from "../services/UserService";
+import { Logger } from "../middlewares/logger";
+
+const logger = new Logger();
+const auth = new Auth();
 
 const signUp = async (req: Request, res: Response) => {
   try {
     let data: IUser = req.body;
-
-    const auth = new Auth();
     let user = await auth.createUser(data);
 
     const token = auth.createToken(user);
@@ -36,10 +37,9 @@ const signUp = async (req: Request, res: Response) => {
 const signIn = async (req: Request, res: Response) => {
   try {
     const data = req.body;
-    const auth = new Auth();
     console.log(data);
     // @ts-ignore
-    const user = await User.findByEmail(data.email);
+    const user = await auth.signIn(data);
     const token = auth.createToken(user);
     res.cookie("accesToken", token, {
       httpOnly: true,
@@ -56,7 +56,7 @@ const signIn = async (req: Request, res: Response) => {
     };
     res.status(200).json(responseUser);
   } catch (error: any) {
-    console.log(error);
+    logger.error("Error Signing in: ", error);
     res.status(400).json({ message: error.message });
   }
 };
@@ -64,10 +64,10 @@ const signIn = async (req: Request, res: Response) => {
 const getUser = async (req: Request, res: Response) => {
   try {
     const { uuid } = req.params;
-    const userService = new UserService();
-    const user = await userService.getUser(uuid);
+    const user = await auth.getUser(uuid);
     res.status(200).json({ user });
   } catch (error: any) {
+    logger.error(error.message);
     res.status(400).json({ error: error.message });
   }
 };

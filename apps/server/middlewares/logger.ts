@@ -19,8 +19,8 @@ export class Logger {
     console.log(chalk.bgGreen(`-[SUCCESS] ${message}`), data ?? "");
   }
 
-  public warning(message: string) {
-    console.log(chalk.yellow(`-[WARN] ${message}`));
+  public warning(message: string, data?: any) {
+    console.log(chalk.yellow(`-[WARN] ${message}`), data ?? "");
   }
 }
 

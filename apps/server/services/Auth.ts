@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import validator from "validator";
 
 class Auth {
-  async createUser(data: IUser) {
+  public async createUser(data: IUser) {
     try {
       if (!validator.isEmail(data.email)) {
         throw new Error("Invalid email address!");
@@ -28,7 +28,7 @@ class Auth {
     }
   }
 
-  async signIn(data: { email: string; password: string }) {
+  public async signIn(data: { email: string; password: string }) {
     try {
       // @ts-ignore
 
@@ -36,9 +36,21 @@ class Auth {
       if (!user) {
         throw new Error("User not found!");
       }
-      const isMatch = await user.comparePassword(data.password);
+      const isMatch = await bcrypt.compare(data.password, user.password);
       if (!isMatch) {
         throw new Error("Invalid credentials!");
+      }
+      return user;
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+  }
+
+  public async getUser(uuid: string) {
+    try {
+      const user = await User.findOne({ uuid });
+      if (!user) {
+        throw new Error("User not found!");
       }
       return user;
     } catch (error: any) {

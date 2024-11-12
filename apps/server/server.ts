@@ -1,6 +1,5 @@
 import * as dotenv from "dotenv";
 dotenv.config({ path: "dev.env" });
-console.log("ENV : ", process.env.NODE_ENV);
 import express, { Application } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -11,6 +10,7 @@ import reqLogger, { Logger } from "./middlewares/logger";
 const app: Application = express();
 const logger = new Logger();
 const port = process.env.PORT || 5000;
+logger.success(`ENV: ${process.env.NODE_ENV}`);
 
 app.use(express.json());
 app.use(cookieParser());
