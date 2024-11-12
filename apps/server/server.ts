@@ -1,24 +1,30 @@
 import * as dotenv from "dotenv";
-dotenv.config({path: "dev.env"});
+dotenv.config({ path: "dev.env" });
 console.log("ENV : ", process.env.NODE_ENV);
-import express, { Application } from 'express';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import  connectDB  from "./config/dbConfig";
+import express, { Application } from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import connectDB from "./config/dbConfig";
 import userRoutes from "./routes/userRoutes";
+import reqLogger, { Logger } from "./middlewares/logger";
 
 const app: Application = express();
+const logger = new Logger();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin: "http://localhost:3000", credentials: true}));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 (async () => {
   await connectDB();
-  app.listen(port, () => console.log(`Server running on port ${port}`));
-}
-)();
+  app.listen(port, () => logger.success(`Server running on port ${port}`));
+})();
+
+app.use(reqLogger);
+
+app.get("/", (req, res) => {
+  res.json({ message: "Switch API version 1.0" });
+});
 
 app.use("/api/v1/users", userRoutes);
-

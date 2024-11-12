@@ -19,10 +19,9 @@
   "bugs": {
     "url": "https://github.com/tuhinexe/switch/issues"
   },
-  "author": "Tuhin Bar & Priyadarsi Halder",
+  "author": "Tuhin Bar",
   "contributors": [
-    "Tuhin Bar (https://github.com/tuhinexe)",
-    "Priyadarsi Halder (https://github.com/PriyoRaven)"
+    "Tuhin Bar (https://github.com/tuhinexe)"
   ],
   "license": "MIT",
   "devDependencies": {

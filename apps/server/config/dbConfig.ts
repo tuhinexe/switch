@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import { Logger } from "../middlewares/logger";
+
+const logger = new Logger();
 
 const connectDB = async () => {
   try {
@@ -7,7 +10,7 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log(`Connected to Database`);
+    logger.success(`MongoDB Connected..!`);
   } catch (error: any) {
     console.error(`Error: ${error.message}`);
     process.exit(1);
