@@ -13,6 +13,7 @@ const auth = new Auth();
 const signUp = async (req: Request, res: Response) => {
   try {
     let data: IUser = req.body;
+    // logger.log("user", data);
     let user = await auth.createUser(data);
 
     const token = auth.createToken(user);

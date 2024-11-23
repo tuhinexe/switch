@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Buttons/Button';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '@/store/features/authAction';
 import { User } from '@/types';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
@@ -20,8 +20,7 @@ const Signup = (props: Props) => {
   const dispatch: ThunkDispatch<RootState, undefined, AnyAction> =
     useDispatch();
 
-  const {user,loading,error} = useSelector(authSelector);
-
+  const { user, loading, error } = useSelector(authSelector);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,22 +36,23 @@ const Signup = (props: Props) => {
       confirmPassword: data.get('confirmPassword') as string,
     };
     try {
-      const {meta} = await dispatch(signup(payload));
-      if(meta.requestStatus === 'fulfilled'){
+      const { meta } = await dispatch(signup(payload));
+      if (meta.requestStatus === 'fulfilled') {
         toast.success('Welcome to Switch!');
         formElement.reset();
         props.onClose(false);
       } else {
         // @ts-ignore
-        if(error?.message){
-        // @ts-ignore
-          toast.error(error.message);
-          return
+        if (error) {
+          // @ts-ignore
+          toast.error(error.error);
+          return;
         }
         toast.error('Something went wrong!');
       }
     } catch (error) {
       console.log(error);
+      toast.error(error as string);
     }
   };
   return (

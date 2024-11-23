@@ -11,7 +11,8 @@ class Auth {
         throw new Error("Invalid email address!");
       }
 
-      if (!validator.isStrongPassword(data.password, { minLength: 6 })) {
+      if (data.password.length < 6) {
+        console.log(data);
         throw new Error("Password must be at least 6 characters long!");
       }
 
