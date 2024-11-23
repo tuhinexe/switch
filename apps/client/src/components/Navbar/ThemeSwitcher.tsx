@@ -19,13 +19,11 @@ const ThemeSwitcher = (props: Props) => {
 
   if (!mounted) {
     // Suspense fallback
-    return (
-      <SwitcherSkeleton />
-    );
+    return <SwitcherSkeleton />;
   }
 
   return (
-    <div className="w-12 flex items-center justify-start rounded-full border-2 border-primary dark:border-primary bg-indigo-800 bg-opacity-10 dark:bg-indigo-950 dark:bg-opacity-10">
+    <div className="w-[46px] flex items-center justify-start rounded-full border-2 border-primary dark:border-primary bg-indigo-800 bg-opacity-10 dark:bg-indigo-950 dark:bg-opacity-10">
       <motion.button
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         initial={{ x: 0 }}

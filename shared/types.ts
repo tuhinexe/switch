@@ -36,3 +36,18 @@ export interface Stream {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface StreamConfig {
+  streamKey: string;
+  userId: string;
+  title: string;
+  quality: string;
+  platform: "mobile" | "desktop";
+}
+
+export interface StreamStatus {
+  isLive: boolean;
+  viewerCount: number;
+  duration: number;
+  quality: string;
+}
